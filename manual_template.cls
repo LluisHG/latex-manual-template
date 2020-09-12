@@ -8,7 +8,8 @@
 %%         Author: Lluís Hontecillas Guinart (lluis.honte@gmail.com)       %% 
 %%                                                                         %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Versió 1.0.0 - Septembre 2020                                           %%
+%% Versió 1.0.0 - Septembre 2020 - Control de versions en GitHub:          %%
+%% latex-manual-template                                                   %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
