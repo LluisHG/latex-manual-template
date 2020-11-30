@@ -200,10 +200,11 @@
 %% NEW ENVIRONMENT DEFINITIONS                                                              %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newlength{\logoEPSCheight}   
-\setlength{\logoEPSCheight}{1.5cm}
-\newsavebox{\logoEPSC}
-\sbox{\logoEPSC}{\includegraphics[totalheight=\logoEPSCheight]{./setup/EETAC-positiu-negre}}
+% LOGO DESIGN
+\newlength{\logoLLheigh}   
+\setlength{\logoLLheigh}{1.5cm}
+\newsavebox{\logoLL}
+\sbox{\logoLL}{\includegraphics[totalheight=\logoLLheigh]{./setup/EETAC-positiu-negre}}
 
 \newcommand{\mylogo}[2]{ 
   \newlength{\logoheight} 
@@ -213,9 +214,6 @@
 }
 
 
-
-\newcommand{\@textDedicatoria}{Falta dedicatoria!}
-\newcommand{\textDedicatoria}[1]{\renewcommand{\@textDedicatoria}{#1}}
 \newcommand{\@titol}{Falta titol!}
 \newcommand{\titol}[1]{\renewcommand{\@titol}{#1}}
 \newcommand{\@titolE}{Falta titol Angles!}
@@ -224,48 +222,20 @@
 \newcommand{\titolC}[1]{\renewcommand{\@titolC}{#1}}
 \newcommand{\@autor}{Falta autor!}
 \newcommand{\autor}[1]{\renewcommand{\@autor}{#1}}
-\newcommand{\@director}{Falta director!}
-\newcommand{\director}[1]{\renewcommand{\@director}{#1}}
-\newcommand{\@segondirector}{Falta segon director!}
-\newcommand{\segonDirector}[1]{\renewcommand{\@segondirector}{#1}}
-\newcommand{\@supervisor}{Falta supervisor!}
-\newcommand{\supervisor}[1]{\renewcommand{\@supervisor}{#1}}
-\newcommand{\@titulacio}{Falta titulacio!}
-\newcommand{\titulacio}[1]{\renewcommand{\@titulacio}{#1}}
+
 
 \newlength{\Lautors}
-\newlength{\Ldirectors}
 
 %% PORTADA ENVIRONMENT
 %%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\portada}{
-  \ifthenelse{\boolean{Leng}}{
-    %\newcommand{\@NtitolPFC}{PFC title}
-    %\newcommand{\@NtitolTFC}{TFC title}
-    % Modificació respecte a la versió 2.1 - Iván Padilla Montero - Juliol 2014
-    \newcommand{\@NtitolTFC}{TFG title}
-    \newcommand{\@Ntitulacio}{Degree}
-    \newcommand{\@Nautor}{Author}
-    \newcommand{\@Nautors}{Authors}
-    \newcommand{\@Ndirector}{Advisor}
-    \newcommand{\@Ndirectors}{Advisors}
-    \newcommand{\@Nsupervisor}{Supervisor}
-    \newcommand{\@Ndata}{Date}
-    \newcommand{\@Napp}{Appendices}
-  }{
-    \ifthenelse{\boolean{Lcat}}{
+  \ifthenelse{\boolean{Lcat}}{
       %\newcommand{\@NtitolPFC}{T\'itol del PFC}
       %\newcommand{\@NtitolTFC}{T\'itol del TFC}
       % Modificació respecte a la versió 2.1 - Iván Padilla Montero - Juliol 2014
       \newcommand{\@NtitolTFC}{T\'itol del TFG}
-      \newcommand{\@Ntitulacio}{Titulaci\'o}
       \newcommand{\@Nautor}{Autor}
-      \newcommand{\@Nautors}{Autors}
-      \newcommand{\@Ndirector}{Director}
-      \newcommand{\@Ndirectors}{Directors}
-      \newcommand{\@Nsupervisor}{Supervisor}
       \newcommand{\@Ndata}{Data}
-      \newcommand{\@Napp}{Ap\`endixs}
     }{
       %\newcommand{\@NtitolPFC}{T\'itulo del PFC}
       %\newcommand{\@NtitolTFC}{T\'itulo del TFC}
@@ -311,158 +281,6 @@
   \cleardoublepage
 }
 
-
-%% RESUM ENVIRONMENT
-%%%%%%%%%%%%%%%%%%%%%%
-\newenvironment{resum}[1]{
-  
-  \ifthenelse{\boolean{Lcat}}{
-    \newcommand{\@NResum}{Resum}
-    \newcommand{\@NtitolResum}{T\'itol}
-    \newcommand{\@NautorResum}{Autor}
-    \newcommand{\@NautorsResum}{Autors}
-    \newcommand{\@NdirectorResum}{Director}
-    \newcommand{\@NdirectorsResum}{Directors}
-    \newcommand{\@NsupervisorResum}{Supervisor}
-    \newcommand{\@NdataResum}{Data}
-  }{
-    \newcommand{\@NResum}{Resumen}
-    \newcommand{\@NtitolResum}{T\'itulo}
-    \newcommand{\@NautorResum}{Autor}
-    \newcommand{\@NautorsResum}{Autores}
-    \newcommand{\@NdirectorResum}{Director}
-    \newcommand{\@NdirectorsResum}{Directores}
-    \newcommand{\@NsupervisorResum}{Supervisor}
-    \newcommand{\@NdataResum}{Fecha}
-  }
-  
-  \settowidth{\Lautors}{{\normalsize\bf\sffamily   \@NautorsResum : }}
-  \settowidth{\Ldirectors}{{\normalsize\bf\sffamily \@NdirectorsResum :}}
-  \renewcommand{\and}{\\ \hspace*{\Lautors}}
-
-  \newlength{\Hresum}
-  \setlength{\Hresum}{#1}
-
-  \begin{center}
-    \begin{tabular}{|p{\textwidth}|}
-      \hline
-      \vspace*{2mm}
-      {\bf \@NtitolResum  :}   \@titolC   \\[1ex]
-      \ifthenelse{\boolean{UNautor}}{{\bf \@NautorResum:}  \@autor   \\[1ex]}
-                                    {{\bf \@NautorsResum :} \@autor   \\[1ex]}
-      \ifthenelse{\boolean{UNdirector}}{{\bf \@NdirectorResum:}  \@director \\[1ex]}
-                                      {{\bf \@NdirectorsResum:} \@director \\ \hspace*{\Ldirectors} \@segondirector  \\[1ex]}
-      \ifthenelse{\boolean{supervisor}}{{\bf \@NsupervisorResum:} \@supervisor   \\[1ex]}{}
-      {\bf \@NdataResum:}       \today       \\[3mm]
-      \hline
-    \end{tabular}
-    
-    \vspace*{2em}
-    
-    \raggedright      {\bf \@NResum}
-
-    \vspace*{1ex}
-        
-    \begin{tabular}{|p{\textwidth}|}
-      \hline
-      \vspace*{2mm}
-}{
-      \vspace*{\Hresum} \\
-      \hline
-    \end{tabular}
-  \end{center}
-  \cleardoublepage
-}
-
-%% OVERVIEW ENVIRONMENT
-%%%%%%%%%%%%%%%%%%%%%%%%
-\newenvironment{overview}[1]{
-  \settowidth{\Lautors}{{\normalsize\bf\sffamily Authors: }}
-  \settowidth{\Ldirectors}{{\normalsize\bf\sffamily Advisors:}}
-  \renewcommand{\and}{\\ \hspace*{\Lautors}}
-  
-  \newlength{\Hoverview}
-  \setlength{\Hoverview}{#1}
-  
-  \begin{center}
-    \begin{tabular}{|p{\textwidth}|}
-      \hline
-      \vspace*{2mm}
-      {\bf Title :}     \@titolE   \\[1ex]
-      \ifthenelse{\boolean{UNautor}}{{\bf Author:}  \@autor  \\[1ex]}
-                                    {{\bf Authors:} \@autor  \\[1ex]}
-      \ifthenelse{\boolean{UNdirector}}{{\bf Advisor:}  \@director \\[1ex]}
-                                       {{\bf Advisors:} \@director \\ \hspace*{\Ldirectors} \@segondirector  \\[1ex]}
-      \ifthenelse{\boolean{supervisor}}{{\bf Supervisor:} \@supervisor   \\[1ex]}{}
-      {\bf Date:}       \today       \\[3mm]
-      \hline
-    \end{tabular}
-    
-    \vspace*{2em}
-    
-    \raggedright      {\bf Overview}
-    
-    \vspace*{1ex}
-        
-    \begin{tabular}{|p{\textwidth}|}
-      \hline
-      \vspace*{2mm}
-}{
-      \vspace*{\Hoverview} \\
-      \hline
-    \end{tabular}
-  \end{center}
-  \cleardoublepage
-}
-
-
-
-\newlength{\normalparskip}
-\newlength{\normalparindent}
-\setlength{\normalparskip}{1ex}
-\setlength{\normalparindent}{0ex}
-\setlength{\parskip}{\normalparskip}           % Skip size between two paragraphs
-\setlength{\parindent}{\normalparindent}       % Indentation for new paragraphs
-
-\newcommand{\beforepreface}{
-  \pagestyle{empty}
-  \pagenumbering{roman}
-  \setlength{\parskip}{0ex}
-  \setlength{\parindent}{0ex}
-  \portada
-}
-
-\newcommand{\afterpreface}{%
-  \ifdedicatoria
-    \vspace*{5cm}
-    \begin{flushright}
-      \@textDedicatoria
-    \end{flushright}
-    \cleartooddpage[\thispagestyle{empty}]  
-  \fi
-  \tableofcontents
-  \cleartooddpage[\thispagestyle{empty}]
-  \ifpaginaLOF
-%    \addcontentsline{toc}{section}{List of Figures}
-    \listoffigures
-    \cleartooddpage[\thispagestyle{empty}]
-  \fi
-  \ifpaginaLOT
-%    \addcontentsline{toc}{section}{List of Tables}
-  \listoftables 
-  \cleartooddpage[\thispagestyle{empty}]
-  \fi
-  \setlength{\parskip}{\normalparskip}
-  \setlength{\parindent}{\normalparindent}
-  \cleartooddpage[\thispagestyle{empty}]
-  % Define the chapter information (for the header):
-  %    \renewcommand{\chaptermark}[1]{\markboth{\sffamily\small\@chapapp{} \thechapter\ - \ ##1}{}}
-  % Define the section information (for the header):
-%    \renewcommand{\sectionmark}[1]{\markright{\sffamily\small \thesection \ ##1}}
-  %    \headingson
-  \pagenumbering{arabic}
-  \pagestyle{fancy}
-}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% HEADERS AND FOOTERS DESIGN                                                               %%
