@@ -134,7 +134,7 @@
 % polzada
 
 \ifthenelse{\boolean{twoside}}{% Values for two-sided printing:
-  \setlength{\oddsidemargin}{-0.46cm}      %   Left margin on odd-numbered pages.
+  \setlength{\oddsidemargin}{-0.45cm}      %   Left margin on odd-numbered pages.
   \setlength{\evensidemargin}{-0.46cm}     %   Left margin on even-numbered pages.
   \setlength{\marginparwidth}{0cm}        %   Width of marginal notes.
   \setlength{\marginparsep}{0cm}            % Horizontal space between outer margin and marginal note
