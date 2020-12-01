@@ -20,8 +20,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{eetac_tfc_pfc}
-              [2012/07/01 v2.1 EETAC TFC/PFC document style]
+\ProvidesClass{manual_template}
+              [2020/12/01 Lluis document style]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%----------------------------------------------------------------------------------------%%%
@@ -30,21 +30,26 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \RequirePackage{ifthen}
 
+% Declaració de la variable booleana per definir els marges en funció si és a doble cara o no
+% Més endavant es modificaran les característiques de cadascuna
 \newboolean{twoside}     
 \newboolean{mparswitch}
+
+
 \newboolean{@draft}      \setboolean{@draft}{false}
 \newboolean{@final}      \setboolean{@final}{false}
 
+% Variables dels possibles idiomes del document
 \newboolean{Lcat}        \setboolean{Lcat}{true}
 \newboolean{Leng}        \setboolean{Leng}{false}
-\newboolean{PFC}         \setboolean{PFC}{false}
-\newboolean{UNautor}     \setboolean{UNautor}{false}
-\newboolean{UNdirector}  \setboolean{UNdirector}{false}
-\newboolean{supervisor}  \setboolean{supervisor}{false}
+\newboolean{Les}	     \setboolean{Les}{false}
+
+%
+% \newboolean{PFC}         \setboolean{PFC}{false} % NOT USED
+\newboolean{UNautor}     \setboolean{UNautor}{true}
 \newboolean{logo}        \setboolean{logo}{false}
 \newboolean{paginaLOF}   \setboolean{paginaLOF}{true}
 \newboolean{paginaLOT}   \setboolean{paginaLOT}{true}
-\newboolean{dedicatoria} \setboolean{dedicatoria}{false}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -53,6 +58,8 @@
 %%%----------------------------------------------------------------------------------------%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% Switch entre les dues opcions de "a doble cara" o "a una cara" per definir les dimensions
+% del paper
 \DeclareOption{oneside}{\setboolean{twoside}{false} \setboolean{mparswitch}{false}}
 \DeclareOption{twoside}{\setboolean{twoside}{true} \setboolean{mparswitch}{true}}
 
@@ -126,13 +133,13 @@
 
 \ifthenelse{\boolean{twoside}}{% Values for two-sided printing:
   \setlength{\oddsidemargin}{0.46cm}      %   Left margin on odd-numbered pages.
-  \setlength{\evensidemargin}{0.46cm}     %   Left margin on even-numbered pages.
+  \setlength{\evensidemargin}{0.50cm}     %   Left margin on even-numbered pages.
   \setlength{\marginparwidth}{0cm}        %   Width of marginal notes.
   \setlength{\marginparsep}{0pt}            % Horizontal space between outer margin and marginal note
 }
 {% Values for one-sided printing:
   \setlength{\oddsidemargin}{0.46cm}      %   Left margin on odd-numbered pages.
-  \setlength{\evensidemargin}{0.46}       %   Left margin on even-numbered pages.
+  \setlength{\evensidemargin}{0.46cm}       %   Left margin on even-numbered pages.
   \setlength{\marginparwidth}{0cm}        %   Width of marginal notes.
   \setlength{\marginparsep}{0pt}            % Horizontal space between outer margin and marginal note
 }
@@ -204,7 +211,7 @@
 \newlength{\logoLLheigh}   
 \setlength{\logoLLheigh}{1.5cm}
 \newsavebox{\logoLL}
-\sbox{\logoLL}{\includegraphics[totalheight=\logoLLheigh]{./setup/EETAC-positiu-negre}}
+\sbox{\logoLL}{\includegraphics[totalheight=\logoLLheigh]{./setup/drone_logo.png}}
 
 \newcommand{\mylogo}[2]{ 
   \newlength{\logoheight} 
@@ -253,33 +260,33 @@
   }
 
 
-  \settowidth{\Lautors}{{\normalsize\bf\sffamily\MakeUppercase   \@Nautors : }}
-  \settowidth{\Ldirectors}{{\normalsize\bf\sffamily\MakeUppercase \@Ndirectors :}}
+  %\settowidth{\Lautors}{{\normalsize\bf\sffamily\MakeUppercase   \@Nautors : }}
+  %\settowidth{\Ldirectors}{{\normalsize\bf\sffamily\MakeUppercase \@Ndirectors :}}
     \renewcommand{\and}{\\ \hspace*{\Lautors}}
 
-  \begin{tabular}{p{\textwidth}}
-    \ifthenelse{\boolean{logo}}{\usebox{\logoEPSC}  \hfill \usebox{\logo}   \\[8cm]}{\usebox{\logoEPSC} \\[8cm]}
-    \ifthenelse{\boolean{PFC}}{\begin{center}\Huge\sffamily\bfseries  PROJECTE DE FI DE CARRERA \end{center}  \\[5cm]}
+  %\begin{tabular}{p{\textwidth}}
+    %\ifthenelse{\boolean{logo}}{\usebox{\logoEPSC}  \hfill \usebox{\logo}   \\[8cm]}{\usebox{\logoEPSC} \\[8cm]}
+    %\ifthenelse{\boolean{PFC}}{\begin{center}\Huge\sffamily\bfseries  PROJECTE DE FI DE CARRERA \end{center}  \\[5cm]}
                               %{\begin{center}\Huge\sffamily\bfseries  TREBALL DE FI DE CARRERA  \end{center}  \\[5cm]}
                               % Modificació respecte a la versió 2.1 - Iván Padilla Montero - Juliol 2014
-                              {\begin{center}\Huge\sffamily\bfseries  TREBALL DE FI DE GRAU  \end{center}  \\[5cm]}
+    %                          {\begin{center}\Huge\sffamily\bfseries  TREBALL DE FI DE GRAU  \end{center}  \\[5cm]}
                               
-    \fbox{\parbox{\textwidth}{
-        \vspace{2ex}
-        \ifthenelse{\boolean{PFC}}{{\normalsize\bf\sffamily\MakeUppercase \@NtitolPFC : \@titol}  \\[2ex]}
-                                  {{\normalsize\bf\sffamily\MakeUppercase \@NtitolTFC : \@titol}  \\[2ex]}
-                   {\normalsize\bf\sffamily\MakeUppercase   \@Ntitulacio : \@titulacio    }  \\[2ex]
-                   \ifthenelse{\boolean{UNautor}}{{\normalsize\bf\sffamily\MakeUppercase \@Nautor :  \@autor  } \\[2ex]}
-                                                 {{\normalsize\bf\sffamily\MakeUppercase \@Nautors : \@autor  } \\[2ex]}
-                   \ifthenelse{\boolean{UNdirector}}{{\normalsize\bf\sffamily\MakeUppercase  \@Ndirector :  \@director }  \\[2ex]}
-                                                    {{\normalsize\bf\sffamily\MakeUppercase  \@Ndirectors : \@director \\ \hspace*{\Ldirectors} \@segondirector }  \\[2ex]}
-                              \ifthenelse{\boolean{supervisor}}{{\normalsize\bf\sffamily\MakeUppercase  \@Nsupervisor : \@supervisor  } \\[2ex]}{}
-                                         {\normalsize\bf\sffamily\MakeUppercase  \@Ndata : \today               }  \\[2ex]
-    }} \\
+    %\fbox{\parbox{\textwidth}{
+    %    \vspace{2ex}
+    %    \ifthenelse{\boolean{PFC}}{{\normalsize\bf\sffamily\MakeUppercase \@NtitolPFC : \@titol}  \\[2ex]}
+    %                              {{\normalsize\bf\sffamily\MakeUppercase \@NtitolTFC : \@titol}  \\[2ex]}
+    %               {\normalsize\bf\sffamily\MakeUppercase   \@Ntitulacio : \@titulacio    }  \\[2ex]
+    %               \ifthenelse{\boolean{UNautor}}{{\normalsize\bf\sffamily\MakeUppercase \@Nautor :  \@autor  } \\[2ex]}
+    %                                             {{\normalsize\bf\sffamily\MakeUppercase \@Nautors : \@autor  } \\[2ex]}
+    %               \ifthenelse{\boolean{UNdirector}}{{\normalsize\bf\sffamily\MakeUppercase  \@Ndirector :  \@director }  \\[2ex]}
+    %                                                {{\normalsize\bf\sffamily\MakeUppercase  \@Ndirectors : \@director \\ \hspace*{\Ldirectors} \@segondirector }  \\[2ex]}
+    %                          \ifthenelse{\boolean{supervisor}}{{\normalsize\bf\sffamily\MakeUppercase  \@Nsupervisor : \@supervisor  } \\[2ex]}{}
+    %                                     {\normalsize\bf\sffamily\MakeUppercase  \@Ndata : \today               }  \\[2ex]
+    %}} \\
     
-  \end{tabular}
+  %\end{tabular}
   \cleardoublepage
-}
+%}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -609,28 +616,28 @@
   \newpage
 }
 
-\newcommand{\ambportada}{
-  \settowidth{\Lautors}{{\normalsize\bf\sffamily\MakeUppercase   \@Nautors : }}
-  \settowidth{\Ldirectors}{{\normalsize\bf\sffamily\MakeUppercase \@Ndirectors :}}
+% \newcommand{\ambportada}{
+%   \settowidth{\Lautors}{{\normalsize\bf\sffamily\MakeUppercase   \@Nautors : }}
+%   \settowidth{\Ldirectors}{{\normalsize\bf\sffamily\MakeUppercase \@Ndirectors :}}
 
-  \begin{tabular}{p{\textwidth}}
-    \ifthenelse{\boolean{logo}}{\usebox{\logoEPSC}  \hfill \usebox{\logo}   \\[8cm]}{\usebox{\logoEPSC} \\[8cm]}
-    \begin{center}\Huge\sffamily\bfseries\MakeUppercase  \@Napp \end{center}  \\[5cm]
-    \fbox{\parbox{\textwidth}{
-        \vspace{2ex}
-        \ifthenelse{\boolean{PFC}}{{\normalsize\bf\sffamily\MakeUppercase \@NtitolPFC : \@titol  } \\[2ex]}
-                   {{\normalsize\bf\sffamily\MakeUppercase \@NtitolTFC  : \@titol  } \\[2ex]}
-                   {\normalsize\bf\sffamily\MakeUppercase  \@Ntitulacio : \@titulacio    }  \\[2ex]
-                   \ifthenelse{\boolean{UNautor}}{{\normalsize\bf\sffamily\MakeUppercase \@Nautor:  \@autor } \\[2ex]}
-                              {{\normalsize\bf\sffamily\MakeUppercase \@Nautors : \@autor } \\[2ex]}
-                              \ifthenelse{\boolean{UNdirector}}{{\normalsize\bf\sffamily\MakeUppercase \@Ndirector :  \@director }  \\[2ex]}
-                                         {{\normalsize\bf\sffamily\MakeUppercase \@Ndirectors : \@director \\ \hspace*{\Ldirectors} \@segondirector }  \\[2ex]}
-                                         \ifthenelse{\boolean{supervisor}}{{\normalsize\bf\sffamily\MakeUppercase \@Nsupervisor : \@supervisor  } \\[2ex]}{}
-                                                    {\normalsize\bf\sffamily\MakeUppercase  \@Ndata : \today               }  \\[2ex]
-    }} \\
-  \end{tabular}
-  \setcounter{page}{-1}
-}
+%   \begin{tabular}{p{\textwidth}}
+%     \ifthenelse{\boolean{logo}}{\usebox{\logoEPSC}  \hfill \usebox{\logo}   \\[8cm]}{\usebox{\logoEPSC} \\[8cm]}
+%     \begin{center}\Huge\sffamily\bfseries\MakeUppercase  \@Napp \end{center}  \\[5cm]
+%     \fbox{\parbox{\textwidth}{
+%         \vspace{2ex}
+%         \ifthenelse{\boolean{PFC}}{{\normalsize\bf\sffamily\MakeUppercase \@NtitolPFC : \@titol  } \\[2ex]}
+%                    {{\normalsize\bf\sffamily\MakeUppercase \@NtitolTFC  : \@titol  } \\[2ex]}
+%                    {\normalsize\bf\sffamily\MakeUppercase  \@Ntitulacio : \@titulacio    }  \\[2ex]
+%                    \ifthenelse{\boolean{UNautor}}{{\normalsize\bf\sffamily\MakeUppercase \@Nautor:  \@autor } \\[2ex]}
+%                               {{\normalsize\bf\sffamily\MakeUppercase \@Nautors : \@autor } \\[2ex]}
+%                               \ifthenelse{\boolean{UNdirector}}{{\normalsize\bf\sffamily\MakeUppercase \@Ndirector :  \@director }  \\[2ex]}
+%                                          {{\normalsize\bf\sffamily\MakeUppercase \@Ndirectors : \@director \\ \hspace*{\Ldirectors} \@segondirector }  \\[2ex]}
+%                                          \ifthenelse{\boolean{supervisor}}{{\normalsize\bf\sffamily\MakeUppercase \@Nsupervisor : \@supervisor  } \\[2ex]}{}
+%                                                     {\normalsize\bf\sffamily\MakeUppercase  \@Ndata : \today               }  \\[2ex]
+%     }} \\
+%   \end{tabular}
+%   \setcounter{page}{-1}
+% }
  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
