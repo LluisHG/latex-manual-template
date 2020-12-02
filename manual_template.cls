@@ -46,10 +46,11 @@
 
 %
 % \newboolean{PFC}         \setboolean{PFC}{false} % NOT USED
+\newboolean{manual}	     \setboolean{manual}{false}
 \newboolean{UNautor}     \setboolean{UNautor}{true}
 \newboolean{logo}        \setboolean{logo}{false}
-\newboolean{paginaLOF}   \setboolean{paginaLOF}{true}
-\newboolean{paginaLOT}   \setboolean{paginaLOT}{true}
+\newboolean{paginaLOF}   \setboolean{paginaLOF}{false}
+\newboolean{paginaLOT}   \setboolean{paginaLOT}{false}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -92,7 +93,7 @@
 \RequirePackage{fancyhdr,nextpage}   %% Fancy Headers. Next page can force empty style when  
                                      %% blank page is inserted due to chapter change        
                                      %% by using \cleartooddpage instead of \cleardoublepage
-
+\RequirePackage[export]{adjustbox}
 \RequirePackage[subfigure]{tocloft}  %% Controls typografic design of the TOC, LOF etc...
 \RequirePackage{graphicx}            %% Include graphic files
 \RequirePackage{url}                 %% Allows a easy handle of URLs
@@ -100,10 +101,9 @@
 
 
 \renewcommand{\familydefault}{\sfdefault}  %% sans-serif is default
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -111,7 +111,6 @@
 %%%----------------------------------------------------------------------------------------%%%
 %%%                              DOCUMENT CLASS DEFINITIONS                                %%%
 %%%----------------------------------------------------------------------------------------%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -131,11 +130,14 @@
 % HORIZONTAL SPACING
 %%%%%%%%%%%%%%%%%%%%
 
+% En aquest cas el \hoffset és zero i per tant el marge horitzontal per defecte es d'una
+% polzada
+
 \ifthenelse{\boolean{twoside}}{% Values for two-sided printing:
-  \setlength{\oddsidemargin}{0.46cm}      %   Left margin on odd-numbered pages.
-  \setlength{\evensidemargin}{0.50cm}     %   Left margin on even-numbered pages.
+  \setlength{\oddsidemargin}{-0.46cm}      %   Left margin on odd-numbered pages.
+  \setlength{\evensidemargin}{-0.46cm}     %   Left margin on even-numbered pages.
   \setlength{\marginparwidth}{0cm}        %   Width of marginal notes.
-  \setlength{\marginparsep}{0pt}            % Horizontal space between outer margin and marginal note
+  \setlength{\marginparsep}{0cm}            % Horizontal space between outer margin and marginal note
 }
 {% Values for one-sided printing:
   \setlength{\oddsidemargin}{0.46cm}      %   Left margin on odd-numbered pages.
@@ -160,7 +162,7 @@
 
 \setlength{\textheight}{24.6cm}    % \textheight is the height of text 
                                    %(including footnotes and figures, excluding running head and foot).
-\setlength{\textwidth}{15cm}       % Width of text line.
+\setlength{\textwidth}{16.5cm}       % Width of text line.
 
 % A \raggedbottom command causes 'ragged bottom' pages: pages set to
 % natural height instead of being stretched to exactly \textheight.
@@ -209,24 +211,30 @@
 
 % LOGO DESIGN
 \newlength{\logoLLheigh}   
-\setlength{\logoLLheigh}{1.5cm}
+\setlength{\logoLLheigh}{3.5cm}
 \newsavebox{\logoLL}
-\sbox{\logoLL}{\includegraphics[totalheight=\logoLLheigh]{./setup/drone_logo.png}}
+\sbox{\logoLL}{\includegraphics[totalheight=\logoLLheigh, right]{./setup/drone_logo.png}}
 
 \newcommand{\mylogo}[2]{ 
   \newlength{\logoheight} 
   \newsavebox{\logo}      
   \setlength{\logoheight}{#2}
-  \sbox{\logo}{\includegraphics[totalheight=\logoheight]{#1}}
+  \sbox{\logo}{\includegraphics[totalheight=\logoheight, right]{#1}}
 }
 
 
 \newcommand{\@titol}{Falta titol!}
 \newcommand{\titol}[1]{\renewcommand{\@titol}{#1}}
+
 \newcommand{\@titolE}{Falta titol Angles!}
 \newcommand{\titolE}[1]{\renewcommand{\@titolE}{#1}}
+
 \newcommand{\@titolC}{Falta titol Catala!}
 \newcommand{\titolC}[1]{\renewcommand{\@titolC}{#1}}
+
+\newcommand{\@titolES}{Falta titol Castella!}
+\newcommand{\titolES}[1]{\renewcommand{\@titolES}{#1}}
+
 \newcommand{\@autor}{Falta autor!}
 \newcommand{\autor}[1]{\renewcommand{\@autor}{#1}}
 
@@ -237,44 +245,66 @@
 %%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\portada}{
   \ifthenelse{\boolean{Lcat}}{
-      %\newcommand{\@NtitolPFC}{T\'itol del PFC}
-      %\newcommand{\@NtitolTFC}{T\'itol del TFC}
-      % Modificació respecte a la versió 2.1 - Iván Padilla Montero - Juliol 2014
-      \newcommand{\@NtitolTFC}{T\'itol del TFG}
+      \newcommand{\@NtitolMANUAL}{T\'itol del manual}
       \newcommand{\@Nautor}{Autor}
+      \newcommand{\@Ntitulacio}{Titulaci\'o}
       \newcommand{\@Ndata}{Data}
-    }{
-      %\newcommand{\@NtitolPFC}{T\'itulo del PFC}
-      %\newcommand{\@NtitolTFC}{T\'itulo del TFC}
-      % Modificació respecte a la versió 2.1 - Iván Padilla Montero - Juliol 2014
-      \newcommand{\@NtitolTFC}{T\'itulo del TFG}
-      \newcommand{\@Ntitulacio}{Titulaci\'on}
+  }{
+  	\ifthenelse{\boolean{Les}}{
+      \newcommand{\@NtitolMANUAL}{T\'itulo del manual}
       \newcommand{\@Nautor}{Autor}
-      \newcommand{\@Nautors}{Autores}
-      \newcommand{\@Ndirector}{Director}
-      \newcommand{\@Ndirectors}{Directores}
-      \newcommand{\@Nsupervisor}{Supervisor}
+      \newcommand{\@Ntitulacio}{Titulaci\'on}
       \newcommand{\@Ndata}{Fecha}    
-      \newcommand{\@Napp}{Ap\'endices}                      
+    }{
+  	  \newcommand{\@NtitolMANUAL}{Manual title}
+      \newcommand{\@Nautor}{Author}
+      \newcommand{\@Ntitulacio}{Degree}
+      \newcommand{\@Ndata}{Date} 
     }
   }
 
-
   %\settowidth{\Lautors}{{\normalsize\bf\sffamily\MakeUppercase   \@Nautors : }}
   %\settowidth{\Ldirectors}{{\normalsize\bf\sffamily\MakeUppercase \@Ndirectors :}}
-    \renewcommand{\and}{\\ \hspace*{\Lautors}}
+  \renewcommand{\and}{\\ \hspace*{\Lautors}}
 
-  %\begin{tabular}{p{\textwidth}}
-    %\ifthenelse{\boolean{logo}}{\usebox{\logoEPSC}  \hfill \usebox{\logo}   \\[8cm]}{\usebox{\logoEPSC} \\[8cm]}
-    %\ifthenelse{\boolean{PFC}}{\begin{center}\Huge\sffamily\bfseries  PROJECTE DE FI DE CARRERA \end{center}  \\[5cm]}
-                              %{\begin{center}\Huge\sffamily\bfseries  TREBALL DE FI DE CARRERA  \end{center}  \\[5cm]}
-                              % Modificació respecte a la versió 2.1 - Iván Padilla Montero - Juliol 2014
-    %                          {\begin{center}\Huge\sffamily\bfseries  TREBALL DE FI DE GRAU  \end{center}  \\[5cm]}
-                              
+  \begin{tabular}{p{\textwidth}}
+    % LOGO
+    %%%%%%%%%%%%
+    \ifthenelse{\boolean{logo}}
+    {
+    	\usebox{\logoLL}  \hfill \usebox{\logo}   
+    	\\[8cm]
+    }{	
+    	\usebox{\logoLL} 
+    	\\[8cm]
+    }
+
+    % TITOL
+    %%%%%%%%%%%%
+    \ifthenelse{\boolean{Lcat}}{
+    	\begin{flushleft}
+    		\Huge\sffamily\bfseries\MakeUppercase  \@titolC 
+    	\end{flushleft}  
+    	\\[5cm]
+    }{
+	  \ifthenelse{\boolean{Leng}}{
+		\begin{flushleft}
+			\Huge\sffamily\bfseries\MakeUppercase  \@titolE 
+		\end{flushleft}  
+		\\[5cm]
+	  }{
+    	\begin{center}
+    		\Huge\sffamily\bfseries\MakeUppercase  \@titolES  
+    	\end{center}  
+    	\\[5cm]
+      }
+    }
+
+
     %\fbox{\parbox{\textwidth}{
     %    \vspace{2ex}
     %    \ifthenelse{\boolean{PFC}}{{\normalsize\bf\sffamily\MakeUppercase \@NtitolPFC : \@titol}  \\[2ex]}
-    %                              {{\normalsize\bf\sffamily\MakeUppercase \@NtitolTFC : \@titol}  \\[2ex]}
+    %                              {{\normalsize\bf\sffamily\MakeUppercase \@NtitolMANUAL : \@titol}  \\[2ex]}
     %               {\normalsize\bf\sffamily\MakeUppercase   \@Ntitulacio : \@titulacio    }  \\[2ex]
     %               \ifthenelse{\boolean{UNautor}}{{\normalsize\bf\sffamily\MakeUppercase \@Nautor :  \@autor  } \\[2ex]}
     %                                             {{\normalsize\bf\sffamily\MakeUppercase \@Nautors : \@autor  } \\[2ex]}
@@ -284,10 +314,49 @@
     %                                     {\normalsize\bf\sffamily\MakeUppercase  \@Ndata : \today               }  \\[2ex]
     %}} \\
     
-  %\end{tabular}
+  \end{tabular}
   \cleardoublepage
-%}
+}
 
+\newcommand{\beforepreface}{
+  \pagestyle{empty}
+  \pagenumbering{roman}
+  \setlength{\parskip}{0ex}
+  \setlength{\parindent}{0ex}
+  \portada
+}
+
+\newcommand{\afterpreface}{%
+  \ifdedicatoria
+    \vspace*{5cm}
+    \begin{flushright}
+      \@textDedicatoria
+    \end{flushright}
+    \cleartooddpage[\thispagestyle{empty}]  
+  \fi
+  \tableofcontents
+  \cleartooddpage[\thispagestyle{empty}]
+  \ifpaginaLOF
+%    \addcontentsline{toc}{section}{List of Figures}
+    \listoffigures
+    \cleartooddpage[\thispagestyle{empty}]
+  \fi
+  \ifpaginaLOT
+%    \addcontentsline{toc}{section}{List of Tables}
+  \listoftables 
+  \cleartooddpage[\thispagestyle{empty}]
+  \fi
+  \setlength{\parskip}{\normalparskip}
+  \setlength{\parindent}{\normalparindent}
+  \cleartooddpage[\thispagestyle{empty}]
+  % Define the chapter information (for the header):
+  %    \renewcommand{\chaptermark}[1]{\markboth{\sffamily\small\@chapapp{} \thechapter\ - \ ##1}{}}
+  % Define the section information (for the header):
+%    \renewcommand{\sectionmark}[1]{\markright{\sffamily\small \thesection \ ##1}}
+  %    \headingson
+  \pagenumbering{arabic}
+  \pagestyle{fancy}
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% HEADERS AND FOOTERS DESIGN                                                               %%
@@ -626,7 +695,7 @@
 %     \fbox{\parbox{\textwidth}{
 %         \vspace{2ex}
 %         \ifthenelse{\boolean{PFC}}{{\normalsize\bf\sffamily\MakeUppercase \@NtitolPFC : \@titol  } \\[2ex]}
-%                    {{\normalsize\bf\sffamily\MakeUppercase \@NtitolTFC  : \@titol  } \\[2ex]}
+%                    {{\normalsize\bf\sffamily\MakeUppercase \@NtitolMANUAL  : \@titol  } \\[2ex]}
 %                    {\normalsize\bf\sffamily\MakeUppercase  \@Ntitulacio : \@titulacio    }  \\[2ex]
 %                    \ifthenelse{\boolean{UNautor}}{{\normalsize\bf\sffamily\MakeUppercase \@Nautor:  \@autor } \\[2ex]}
 %                               {{\normalsize\bf\sffamily\MakeUppercase \@Nautors : \@autor } \\[2ex]}
