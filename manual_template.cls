@@ -215,14 +215,21 @@
 \newsavebox{\logoLL}
 \sbox{\logoLL}{\includegraphics[totalheight=\logoLLheigh, right]{./setup/drone_logo.png}}
 
-\newcommand{\mylogo}[2]{ 
+\newcommand{\mylogo}[2]
+{ 
   \newlength{\logoheight} 
   \newsavebox{\logo}      
   \setlength{\logoheight}{#2}
   \sbox{\logo}{\includegraphics[totalheight=\logoheight, right]{#1}}
 }
 
+% COVER IMAGES DESIGN
+% \newlength{\coverImgheight}	
+% \setlength{\coverImgheight}{8cm}
+% \newsavebox{\coverImg}
+% \sbox{\coverImg}{\includegraphics[totalheight=\coverImgheight]{./setup/cover_img.jpg}}
 
+% TITLE DESIGN
 \newcommand{\@titol}{Falta titol!}
 \newcommand{\titol}[1]{\renewcommand{\@titol}{#1}}
 
@@ -265,7 +272,7 @@
 
   %\settowidth{\Lautors}{{\normalsize\bf\sffamily\MakeUppercase   \@Nautors : }}
   %\settowidth{\Ldirectors}{{\normalsize\bf\sffamily\MakeUppercase \@Ndirectors :}}
-  \renewcommand{\and}{\\ \hspace*{\Lautors}}
+  %\renewcommand{\and}{\\ \hspace*{\Lautors}}
 
   \begin{tabular}{p{\textwidth}}
     % LOGO
@@ -276,12 +283,13 @@
     	\\[8cm]
     }{	
     	\usebox{\logoLL} 
-    	\\[8cm]
+    	\\[6cm]
     }
 
     % TITOL
     %%%%%%%%%%%%
-    \ifthenelse{\boolean{Lcat}}{
+    \ifthenelse{\boolean{Lcat}}
+    {
     	\begin{flushleft}
     		\Huge\sffamily\bfseries\MakeUppercase  \@titolC 
     	\end{flushleft}  
@@ -293,12 +301,16 @@
 		\end{flushleft}  
 		\\[5cm]
 	  }{
-    	\begin{center}
+    	\begin{flushleft}
     		\Huge\sffamily\bfseries\MakeUppercase  \@titolES  
-    	\end{center}  
+    	\end{flushleft}  
     	\\[5cm]
       }
     }
+
+    % IMATGE PRINCIPAL
+    %%%%%%%%%%%%%%%%%%%%%
+    %\usebox{\coverImg}
 
 
     %\fbox{\parbox{\textwidth}{
