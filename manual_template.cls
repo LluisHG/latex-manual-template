@@ -213,7 +213,7 @@
 \newlength{\logoLLheigh}   
 \setlength{\logoLLheigh}{3.5cm}
 \newsavebox{\logoLL}
-\sbox{\logoLL}{\includegraphics[totalheight=\logoLLheigh, right]{./setup/drone_logo.png}}
+\sbox{\logoLL}{\includegraphics[totalheight=\logoLLheigh, right]{./setup/drone_logo.jpg}}
 
 \newcommand{\mylogo}[2]
 { 
@@ -224,10 +224,10 @@
 }
 
 % COVER IMAGES DESIGN
-% \newlength{\coverImgheight}	
-% \setlength{\coverImgheight}{8cm}
-% \newsavebox{\coverImg}
-% \sbox{\coverImg}{\includegraphics[totalheight=\coverImgheight]{./setup/cover_img.jpg}}
+\newlength{\coverImgheight}	
+\setlength{\coverImgheight}{8cm}
+\newsavebox{\coverImg}
+\sbox{\coverImg}{\includegraphics[totalheight=\coverImgheight]{./setup/drone_cover.jpg}}
 
 % TITLE DESIGN
 \newcommand{\@titol}{Falta titol!}
@@ -310,7 +310,7 @@
 
     % IMATGE PRINCIPAL
     %%%%%%%%%%%%%%%%%%%%%
-    %\usebox{\coverImg}
+    \usebox{\coverImg}
 
 
     %\fbox{\parbox{\textwidth}{
