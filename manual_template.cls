@@ -35,7 +35,8 @@
 \newboolean{twoside}     
 \newboolean{mparswitch}
 
-
+% Variables per mostrar el document resultant amb imatges i tot o simplement per mostrar
+% on anirá cada cosa
 \newboolean{@draft}      \setboolean{@draft}{false}
 \newboolean{@final}      \setboolean{@final}{false}
 
@@ -210,10 +211,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % LOGO DESIGN
-\newlength{\logoLLheigh}   
-\setlength{\logoLLheigh}{3.5cm}
+\newlength{\logoHeight}  
+\setlength{\logoHeight}{1.5cm}
+
+\newlength{\logoWidth}
+\setlength{\logoWidth}{2cm}
+
 \newsavebox{\logoLL}
-\sbox{\logoLL}{\includegraphics[totalheight=\logoLLheigh, right]{./setup/drone_logo.jpg}}
+\sbox{\logoLL}{
+  \includegraphics[llx = \textheight - \logoHeight, lly = \textwidth - \logoWidth]
+  [urx = \textheight, ury = \textwidth]{./setup/drone_logo.jpg}
+}
 
 \newcommand{\mylogo}[2]
 { 
@@ -224,10 +232,14 @@
 }
 
 % COVER IMAGES DESIGN
-\newlength{\coverImgheight}	
-\setlength{\coverImgheight}{8cm}
+\newlength{\coverImgHeight}	
+\setlength{\coverImgHeight}{10cm}
+
+\newlength{\coverImgWidth}
+\setlength{\coverImgWidth}{16.5cm}
+
 \newsavebox{\coverImg}
-\sbox{\coverImg}{\includegraphics[totalheight=\coverImgheight]{./setup/drone_cover.jpg}}
+\sbox{\coverImg}{\includegraphics[width=\coverImgWidth]{./setup/drone_cover.jpg}}
 
 % TITLE DESIGN
 \newcommand{\@titol}{Falta titol!}
