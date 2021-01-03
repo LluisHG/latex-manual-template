@@ -219,9 +219,12 @@
 
 \newsavebox{\logoLL}
 \sbox{\logoLL}{
-  \includegraphics[llx = \textheight - \logoHeight, lly = \textwidth - \logoWidth]
-  [urx = \textheight, ury = \textwidth]{./setup/drone_logo.jpg}
+  \includegraphics[right, scale = 0.5]{./setup/drone_logo.jpg}
 }
+%\sbox{\logoLL}{
+%  \includegraphics[llx =  22cm, lly =  12cm]
+%  [urx = 23cm, ury = 14cm]{./setup/drone_logo.jpg}
+%}
 
 \newcommand{\mylogo}[2]
 { 
@@ -239,7 +242,7 @@
 \setlength{\coverImgWidth}{16.5cm}
 
 \newsavebox{\coverImg}
-\sbox{\coverImg}{\includegraphics[width=\coverImgWidth]{./setup/drone_cover.jpg}}
+\sbox{\coverImg}{\includegraphics[width=\coverImgWidth]{./setup/drone_cover}}
 
 % TITLE DESIGN
 \newcommand{\@titol}{Falta titol!}
@@ -287,42 +290,51 @@
   %\renewcommand{\and}{\\ \hspace*{\Lautors}}
 
   \begin{tabular}{p{\textwidth}}
+    
     % LOGO
-    %%%%%%%%%%%%
     \ifthenelse{\boolean{logo}}
     {
-    	\usebox{\logoLL}  \hfill \usebox{\logo}   
-    	\\[8cm]
-    }{	
-    	\usebox{\logoLL} 
+      \begin{flushright}
+    	  \usebox{\logoLL}  \hfill \usebox{\logo}
+      \end{flushright}
     	\\[6cm]
+    }{
+      \begin{flushright}
+        \usebox{\logoLL} 
+    	\end{flushright}
+      \\[6cm]
     }
 
+    % ------------------------------------------------------------
     % TITOL
-    %%%%%%%%%%%%
+    % Horizontal line
+    \noindent\makebox[\linewidth]{\rule{\textwidth}{0.8pt}}
     \ifthenelse{\boolean{Lcat}}
     {
-    	\begin{flushleft}
-    		\Huge\sffamily\bfseries\MakeUppercase  \@titolC 
+      \begin{flushleft}
+    		\Huge\rmfamily\bfseries  \@titolC 
     	\end{flushleft}  
-    	\\[5cm]
     }{
 	  \ifthenelse{\boolean{Leng}}{
-		\begin{flushleft}
-			\Huge\sffamily\bfseries\MakeUppercase  \@titolE 
-		\end{flushleft}  
-		\\[5cm]
-	  }{
-    	\begin{flushleft}
-    		\Huge\sffamily\bfseries\MakeUppercase  \@titolES  
-    	\end{flushleft}  
-    	\\[5cm]
+      \begin{flushleft}
+  			\Huge\rmfamily\bfseries\MakeUppercase  \@titolE 
+  		\end{flushleft}  
+	   }{
+      \begin{flushleft}
+        \Huge\rmfamily\bfseries\MakeUppercase  \@titolES  
+      \end{flushleft}  
       }
     }
+    % Horizontal line
+    \noindent\makebox[\linewidth]{\rule{\textwidth}{0.8pt}}
 
+    \\[6cm]
+
+    % ------------------------------------------------------------
     % IMATGE PRINCIPAL
-    %%%%%%%%%%%%%%%%%%%%%
-    \usebox{\coverImg}
+    \begin{centering}
+      \usebox{\coverImg}
+    \end{centering}
 
 
     %\fbox{\parbox{\textwidth}{
