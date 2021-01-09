@@ -103,7 +103,7 @@
 
 \renewcommand{\familydefault}{\sfdefault}  %% sans-serif is default
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -121,16 +121,19 @@
 %%\equal{string1}{string2}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%------------------------------------------------------------------------------------------%%
 %% PAGE LAYOUT                                                                              %%
+%%------------------------------------------------------------------------------------------%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% NOTE!!: All margin dimensions are measured from a point one inch
-% from top and side of page.  
+% NOTE!!: All margin dimensions are measured from a point one inch from top and side of page.  
 
-% HORIZONTAL SPACING
-%%%%%%%%%%%%%%%%%%%%
-
+%%%%%%%%%% HORIZONTAL SPACING %%%%%%%%%%
 % En aquest cas el \hoffset és zero i per tant el marge horitzontal per defecte es d'una
 % polzada
 
@@ -148,48 +151,43 @@
 }
 %\setlength{\hoffset}{-1cm}
 
-% VERTICAL SPACING
-%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%% VERTICAL SPACING %%%%%%%%%%
 % Top of page:
-\setlength{\headheight}{1\baselineskip + 0.1pt}  %    Height of box containing running head.
-\setlength{\headsep}{8mm}                %    Space between running head and text.
-\setlength{\topmargin}{-0.04cm - \headheight - \headsep}          
-                                         %    Nominal distance from top of page to top of box containing running head.
+\setlength{\headheight}{1\baselineskip + 0.1pt}    % Height of box containing running head.
+\setlength{\headsep}{8mm}    % Space between running head and text.
+\setlength{\topmargin}{-0.04cm - \headheight - \headsep}    % Nominal distance from top of page to top of box containing running head.
+
 % Bottom of page:
-\setlength{\footskip}{7mm}       %    Distance from baseline of box containing foot to baseline of last line of text.
+\setlength{\footskip}{7mm}    % Distance from baseline of box containing foot to baseline of last line of text.
 
-% DIMENSION OF TEXT
-%%%%%%%%%%%%%%%%%%%
 
-\setlength{\textheight}{24.6cm}    % \textheight is the height of text 
-                                   %(including footnotes and figures, excluding running head and foot).
-\setlength{\textwidth}{16.5cm}       % Width of text line.
+%%%%%%%%%% DIMENSION OF TEXT %%%%%%%%%%
+\setlength{\textheight}{24.6cm}    % \textheight is the height of text (including footnotes and figures, excluding running head and foot).
+\setlength{\textwidth}{16.5cm}    % Width of text line.
 
-% A \raggedbottom command causes 'ragged bottom' pages: pages set to
-% natural height instead of being stretched to exactly \textheight.
+% A \raggedbottom command causes 'ragged bottom' pages: pages set to natural height instead of being stretched to exactly \textheight.
 \raggedbottom
 
-% FOOTNOTES
-%%%%%%%%%%%
-\setlength{\footnotesep}{8.4pt}    % Height of strut placed at the beginning of every footnote = 
-                                   % height of normal \footnotesize strut, so no extra space between footnotes.
-%%\skip\footins 10.8pt plus 4pt minus 2pt  % Space between last line of text and 
-                                         % top of first footnote.
 
-% FLOATS: (a float is something like a figure or table)
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%% FOOTNOTES %%%%%%%%%%
+\setlength{\footnotesep}{8.4pt}    % Height of strut placed at the beginning of every footnote = height of normal \footnotesize strut, so no extra space between footnotes.
 
+%%\skip\footins 10.8pt plus 4pt minus 2pt  % Space between last line of text and top of first footnote.
+
+
+%%%%%%%%%% FLOATS: (a float is something like a figure or table) %%%%%%%%%%
 % FOR FLOATS ON A TEXT PAGE
+
 %    ONE-COLUMN MODE OR SINGLE-COLUMN FLOATS IN TWO-COLUMN MODE:
-\setlength{\floatsep}{14pt plus 2pt minus 4pt}     % Space between adjacent floats moved  to top or bottom of text page.
-\setlength{\textfloatsep}{20pt plus 2pt minus 4pt} % Space between main text and floats at top or bottom of page.
-\setlength{\intextsep}{14pt plus 4pt minus 4pt}    % Space between in-text figures and text
+\setlength{\floatsep}{14pt plus 2pt minus 4pt}           % Space between adjacent floats moved  to top or bottom of text page.
+\setlength{\textfloatsep}{20pt plus 2pt minus 4pt}       % Space between main text and floats at top or bottom of page.
+\setlength{\intextsep}{14pt plus 4pt minus 4pt}          % Space between in-text figures and text
 %    TWO-COLUMN FLOATS IN TWO-COLUMN MODE:
-\setlength{\dblfloatsep}{14pt plus 2pt minus 4pt}  % Same as \floatsep for double-column figures in two-column mode.
-\setlength{\dbltextfloatsep}{20pt plus 2pt minus 4pt}% \textfloatsep for double-column floats.
+\setlength{\dblfloatsep}{14pt plus 2pt minus 4pt}        % Same as \floatsep for double-column figures in two-column mode.
+\setlength{\dbltextfloatsep}{20pt plus 2pt minus 4pt}    % \textfloatsep for double-column floats.
 
-
-%  FOR FLOATS ON A SEPARATE FLOAT PAGE OR COLUMN
+% FOR FLOATS ON A SEPARATE FLOAT PAGE OR COLUMN
 %    ONE-COLUMN MODE OR SINGLE-COLUMN FLOATS IN TWO-COLUMN MODE:
 \setlength{\@fptop}{0pt plus 1fil}      % Stretch at top of float page/column. (Must be 0pt plus ...)          
 \setlength{\@fpsep}{10pt plus 2fil}     % Space between floats on float page/column.       
@@ -199,18 +197,21 @@
 \setlength{\@dblfpsep}{10pt plus 2fil}  % Space between floats on float page.
 \setlength{\@dblfpbot}{0pt plus 1fil}   % Stretch at bottom of float page. (Must be 0pt plus ... )     
 
-% MARGINAL NOTES
-%%%%%%%%%%%%%%%%
+
+%%%%%%%%%% MARGINAL NOTES %%%%%%%%%%
 \setlength{\marginparpush}{7pt}       % Minimum vertical separation between two marginal notes.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%------------------------------------------------------------------------------------------%%
 %% NEW ENVIRONMENT DEFINITIONS                                                              %%
+%%------------------------------------------------------------------------------------------%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% LOGO DESIGN
+
+%%%%%%%%%% LOGO DESIGN %%%%%%%%%%
 \newlength{\logoHeight}  
 \setlength{\logoHeight}{1.5cm}
 
@@ -234,7 +235,8 @@
   \sbox{\logo}{\includegraphics[totalheight=\logoheight, right]{#1}}
 }
 
-% COVER IMAGES DESIGN
+
+%%%%%%%%%% COVER IMAGE DESIGN %%%%%%%%%%
 \newlength{\coverImgHeight}	
 \setlength{\coverImgHeight}{10cm}
 
@@ -244,7 +246,8 @@
 \newsavebox{\coverImg}
 \sbox{\coverImg}{\includegraphics[width=\coverImgWidth]{./setup/drone_cover}}
 
-% TITLE DESIGN
+
+%%%%%%%%%% TITLE DESIGN %%%%%%%%%%
 \newcommand{\@titol}{Falta titol!}
 \newcommand{\titol}[1]{\renewcommand{\@titol}{#1}}
 
@@ -263,8 +266,8 @@
 
 \newlength{\Lautors}
 
-%% PORTADA ENVIRONMENT
-%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%% PORTADA ENVIRONMENT %%%%%%%%%%
 \newcommand{\portada}{
   \ifthenelse{\boolean{Lcat}}{
       \newcommand{\@NtitolMANUAL}{T\'itol del manual}
@@ -304,16 +307,16 @@
     	\end{flushright}
       \\[6cm]
     }
-
+    
     % ------------------------------------------------------------
     % TITOL
     % Horizontal line
-    \noindent\makebox[\linewidth]{\rule{\textwidth}{0.8pt}}
+    \noindent\makebox[\linewidth]{\rule{\textwidth}{1.8pt}}
     \ifthenelse{\boolean{Lcat}}
     {
-      \begin{flushleft}
-    		\Huge\rmfamily\bfseries  \@titolC 
-    	\end{flushleft}  
+      \begin{center}
+    		\Huge\rmfamily  \@titolC 
+      \end{center}  
     }{
 	  \ifthenelse{\boolean{Leng}}{
       \begin{flushleft}
@@ -326,7 +329,7 @@
       }
     }
     % Horizontal line
-    \noindent\makebox[\linewidth]{\rule{\textwidth}{0.8pt}}
+    \noindent\makebox[\linewidth]{\rule{\textwidth}{1.8pt}}
 
     \\[6cm]
 
