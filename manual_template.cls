@@ -37,21 +37,22 @@
 
 % Variables per mostrar el document resultant amb imatges i tot o simplement per mostrar
 % on anirá cada cosa
-\newboolean{@draft}      \setboolean{@draft}{false}
-\newboolean{@final}      \setboolean{@final}{false}
+\newboolean{@draft} \setboolean{@draft}{false}
+\newboolean{@final} \setboolean{@final}{false}
 
 % Variables dels possibles idiomes del document
-\newboolean{Lcat}        \setboolean{Lcat}{true}
-\newboolean{Leng}        \setboolean{Leng}{false}
-\newboolean{Les}	     \setboolean{Les}{false}
+\newboolean{Lcat}   \setboolean{Lcat}{true}
+\newboolean{Leng}   \setboolean{Leng}{false}
+\newboolean{Les}	\setboolean{Les}{false}
 
 %
 % \newboolean{PFC}         \setboolean{PFC}{false} % NOT USED
-\newboolean{manual}	     \setboolean{manual}{false}
-\newboolean{UNautor}     \setboolean{UNautor}{true}
-\newboolean{logo}        \setboolean{logo}{false}
-\newboolean{paginaLOF}   \setboolean{paginaLOF}{false}
-\newboolean{paginaLOT}   \setboolean{paginaLOT}{false}
+\newboolean{manual}	    \setboolean{manual}{false}
+\newboolean{autor}     	\setboolean{autor}{true}
+\newboolean{logo}       \setboolean{logo}{false}
+\newboolean{coverpage}	\setboolean{coverpage}{false}
+\newboolean{paginaLOF}  \setboolean{paginaLOF}{false}
+\newboolean{paginaLOT}  \setboolean{paginaLOT}{false}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -63,10 +64,10 @@
 % Switch entre les dues opcions de "a doble cara" o "a una cara" per definir les dimensions
 % del paper
 \DeclareOption{oneside}{\setboolean{twoside}{false} \setboolean{mparswitch}{false}}
-\DeclareOption{twoside}{\setboolean{twoside}{true} \setboolean{mparswitch}{true}}
+\DeclareOption{twoside}{\setboolean{twoside}{true} 	\setboolean{mparswitch}{true}}
 
-\DeclareOption{draft}{\AtEndOfClass{\setlength\overfullrule{10pt}\setboolean{@draft}{true}}}
-\DeclareOption{final}{\AtEndOfClass{\setlength\overfullrule{0pt} \setboolean{@final}{true}}}
+\DeclareOption{draft}{\AtEndOfClass{\setlength\overfullrule{10pt}	\setboolean{@draft}{true}}}
+\DeclareOption{final}{\AtEndOfClass{\setlength\overfullrule{0pt} 	\setboolean{@final}{true}}}
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{book}}
 %\DeclareOption*{code}  -->  code execution for a unknown option
@@ -212,14 +213,14 @@
 
 
 %%%%%%%%%% LOGO DESIGN %%%%%%%%%%
-\newlength{\logoHeight}  
-\setlength{\logoHeight}{1.5cm}
+\newlength{\LogoHeight}  
+\setlength{\LogoHeight}{1.5cm}
 
-\newlength{\logoWidth}
-\setlength{\logoWidth}{2cm}
+\newlength{\LogoWidth}
+\setlength{\LogoWidth}{2cm}
 
-\newsavebox{\logoLL}
-\sbox{\logoLL}{
+\newsavebox{\LogoLL}
+\sbox{\LogoLL}{
   \includegraphics[right, scale = 0.5]{./setup/drone_logo.jpg}
 }
 %\sbox{\logoLL}{
@@ -229,23 +230,30 @@
 
 \newcommand{\mylogo}[2]
 { 
-  \newlength{\logoheight} 
-  \newsavebox{\logo}      
-  \setlength{\logoheight}{#2}
-  \sbox{\logo}{\includegraphics[totalheight=\logoheight, right]{#1}}
+  \newlength{\logoHeight} 
+  \newsavebox{\logoImg}      
+  \setlength{\logoHeight}{#2}
+  \sbox{\logoImg}{\includegraphics[totalheight=\logoHeight, right]{#1}}
 }
 
 
 %%%%%%%%%% COVER IMAGE DESIGN %%%%%%%%%%
-\newlength{\coverImgHeight}	
-\setlength{\coverImgHeight}{10cm}
+\newlength{\CoverImgHeight}	
+\setlength{\CoverImgHeight}{10cm}
 
-\newlength{\coverImgWidth}
-\setlength{\coverImgWidth}{16.5cm}
+\newlength{\CoverImgWidth}
+\setlength{\CoverImgWidth}{16.5cm}
 
-\newsavebox{\coverImg}
-\sbox{\coverImg}{\includegraphics[width=\coverImgWidth]{./setup/drone_cover}}
+\newsavebox{\CoverImgLL}
+\sbox{\CoverImgLL}{\includegraphics[width=\CoverImgWidth]{./setup/drone_cover}}
 
+\newcommand{\mycoverImg}[2]
+{ 
+  \newlength{\coverImgWidth} 
+  \newsavebox{\coverImg}      
+  \setlength{\coverImgWidth}{#2}
+  \sbox{\coverImg}{\includegraphics[width=\coverImgWidth]{#1}}
+}
 
 %%%%%%%%%% TITLE DESIGN %%%%%%%%%%
 \newcommand{\@titol}{Falta titol!}
@@ -260,11 +268,18 @@
 \newcommand{\@titolES}{Falta titol Castella!}
 \newcommand{\titolES}[1]{\renewcommand{\@titolES}{#1}}
 
-\newcommand{\@autor}{Falta autor!}
-\newcommand{\autor}[1]{\renewcommand{\@autor}{#1}}
 
+%%%%%%%%%% AUTHORS DESIGN %%%%%%%%%%
+\newcommand{\@autorC}{Falta autor!}
+\newcommand{\autorC}[1]{\renewcommand{\@autorC}{Autor: #1}}
 
-\newlength{\Lautors}
+\newcommand{\@autorE}{Author missing!}
+\newcommand{\autorE}[1]{\renewcommand{\@autorE}{Author: #1}}
+
+\newcommand{\@autorES}{Falta autor!}
+\newcommand{\autorES}[1]{\renewcommand{\@autorES}{Autor: #1}}
+
+%\newlength{\Lautors}
 
 
 %%%%%%%%%% PORTADA ENVIRONMENT %%%%%%%%%%
@@ -297,15 +312,15 @@
     % LOGO
     \ifthenelse{\boolean{logo}}
     {
-      \begin{flushright}
-    	  \usebox{\logoLL}  \hfill \usebox{\logo}
-      \end{flushright}
+      	\begin{flushright}
+			\usebox{\LogoLL}  \hfill \usebox{\logoImg}
+      	\end{flushright}
     	\\[6cm]
     }{
-      \begin{flushright}
-        \usebox{\logoLL} 
+      	\begin{flushright}
+        	\usebox{\LogoLL} 
     	\end{flushright}
-      \\[6cm]
+      	\\[6cm]
     }
     
     % ------------------------------------------------------------
@@ -314,30 +329,68 @@
     \noindent\makebox[\linewidth]{\rule{\textwidth}{1.8pt}}
     \ifthenelse{\boolean{Lcat}}
     {
-      \begin{center}
-    		\Huge\rmfamily  \@titolC 
-      \end{center}  
-    }{
-	  \ifthenelse{\boolean{Leng}}{
-      \begin{flushleft}
-  			\Huge\rmfamily\bfseries\MakeUppercase  \@titolE 
-  		\end{flushleft}  
-	   }{
-      \begin{flushleft}
-        \Huge\rmfamily\bfseries\MakeUppercase  \@titolES  
-      \end{flushleft}  
-      }
+		\begin{center}
+			\Huge\rmfamily  \@titolC 
+      	\end{center}  
+    }
+    {
+	  	\ifthenelse{\boolean{Leng}}
+	  	{
+      		\begin{center}
+  				\Huge\rmfamily  \@titolE 
+  			\end{center}  
+	   	}
+	   	{
+      		\begin{center}
+        		\Huge\rmfamily  \@titolES  
+      		\end{center}  
+      	}
     }
     % Horizontal line
     \noindent\makebox[\linewidth]{\rule{\textwidth}{1.8pt}}
 
-    \\[6cm]
+    % ------------------------------------------------------------
+    % AUTHORS
+    \\[1.5cm]
+    \ifthenelse{\boolean{autor}}
+    {
+	    \ifthenelse{\boolean{Lcat}} 
+	    {
+	    	\begin{center}
+    			\large\rmfamily \textit{\@autorC}
+	    	\end{center}
+	    }
+	    {
+	      	\ifthenelse{\boolean{Leng}} 
+	      	{ 
+	      		\begin{center}
+    				\large\rmfamily \textit{\@autorE}
+	    		\end{center} 
+	      	}
+	      	{
+	      		 \begin{center}
+    				\large\rmfamily \textit{\@autorES} 
+	    		\end{center} 
+	      	}
+	    }
+    }
+
+    \\[2.5cm]
 
     % ------------------------------------------------------------
     % IMATGE PRINCIPAL
-    \begin{centering}
-      \usebox{\coverImg}
-    \end{centering}
+    
+    \ifthenelse{\boolean{coverpage}}
+    {
+        \begin{centering}
+      		\usebox{\coverImg}
+    	\end{centering}
+    }
+    {
+    	\begin{centering}
+      		\usebox{\CoverImgLL}
+    	\end{centering}
+    }
 
 
     %\fbox{\parbox{\textwidth}{
@@ -345,7 +398,7 @@
     %    \ifthenelse{\boolean{PFC}}{{\normalsize\bf\sffamily\MakeUppercase \@NtitolPFC : \@titol}  \\[2ex]}
     %                              {{\normalsize\bf\sffamily\MakeUppercase \@NtitolMANUAL : \@titol}  \\[2ex]}
     %               {\normalsize\bf\sffamily\MakeUppercase   \@Ntitulacio : \@titulacio    }  \\[2ex]
-    %               \ifthenelse{\boolean{UNautor}}{{\normalsize\bf\sffamily\MakeUppercase \@Nautor :  \@autor  } \\[2ex]}
+    %               \ifthenelse{\boolean{autor}}{{\normalsize\bf\sffamily\MakeUppercase \@Nautor :  \@autor  } \\[2ex]}
     %                                             {{\normalsize\bf\sffamily\MakeUppercase \@Nautors : \@autor  } \\[2ex]}
     %               \ifthenelse{\boolean{UNdirector}}{{\normalsize\bf\sffamily\MakeUppercase  \@Ndirector :  \@director }  \\[2ex]}
     %                                                {{\normalsize\bf\sffamily\MakeUppercase  \@Ndirectors : \@director \\ \hspace*{\Ldirectors} \@segondirector }  \\[2ex]}
@@ -736,7 +789,7 @@
 %         \ifthenelse{\boolean{PFC}}{{\normalsize\bf\sffamily\MakeUppercase \@NtitolPFC : \@titol  } \\[2ex]}
 %                    {{\normalsize\bf\sffamily\MakeUppercase \@NtitolMANUAL  : \@titol  } \\[2ex]}
 %                    {\normalsize\bf\sffamily\MakeUppercase  \@Ntitulacio : \@titulacio    }  \\[2ex]
-%                    \ifthenelse{\boolean{UNautor}}{{\normalsize\bf\sffamily\MakeUppercase \@Nautor:  \@autor } \\[2ex]}
+%                    \ifthenelse{\boolean{autor}}{{\normalsize\bf\sffamily\MakeUppercase \@Nautor:  \@autor } \\[2ex]}
 %                               {{\normalsize\bf\sffamily\MakeUppercase \@Nautors : \@autor } \\[2ex]}
 %                               \ifthenelse{\boolean{UNdirector}}{{\normalsize\bf\sffamily\MakeUppercase \@Ndirector :  \@director }  \\[2ex]}
 %                                          {{\normalsize\bf\sffamily\MakeUppercase \@Ndirectors : \@director \\ \hspace*{\Ldirectors} \@segondirector }  \\[2ex]}
