@@ -325,8 +325,10 @@
     
     % ------------------------------------------------------------
     % TITOL
+    
     % Horizontal line
     \noindent\makebox[\linewidth]{\rule{\textwidth}{1.8pt}}
+
     \ifthenelse{\boolean{Lcat}}
     {
 		\begin{center}
@@ -346,6 +348,7 @@
       		\end{center}  
       	}
     }
+
     % Horizontal line
     \noindent\makebox[\linewidth]{\rule{\textwidth}{1.8pt}}
 
@@ -410,44 +413,51 @@
   \cleardoublepage
 }
 
-\newcommand{\beforepreface}{
-  \pagestyle{empty}
-  \pagenumbering{roman}
-  \setlength{\parskip}{0ex}
-  \setlength{\parindent}{0ex}
-  \portada
+\newcommand{\beforepreface}
+{
+	\pagestyle{empty}
+  	\pagenumbering{roman}
+  	\setlength{\parskip}{0ex}
+  	\setlength{\parindent}{0ex}
+  	\portada
 }
 
-\newcommand{\afterpreface}{%
-  \ifdedicatoria
-    \vspace*{5cm}
-    \begin{flushright}
-      \@textDedicatoria
-    \end{flushright}
-    \cleartooddpage[\thispagestyle{empty}]  
-  \fi
-  \tableofcontents
-  \cleartooddpage[\thispagestyle{empty}]
-  \ifpaginaLOF
-%    \addcontentsline{toc}{section}{List of Figures}
-    \listoffigures
-    \cleartooddpage[\thispagestyle{empty}]
-  \fi
-  \ifpaginaLOT
-%    \addcontentsline{toc}{section}{List of Tables}
-  \listoftables 
-  \cleartooddpage[\thispagestyle{empty}]
-  \fi
-  \setlength{\parskip}{\normalparskip}
-  \setlength{\parindent}{\normalparindent}
-  \cleartooddpage[\thispagestyle{empty}]
-  % Define the chapter information (for the header):
-  %    \renewcommand{\chaptermark}[1]{\markboth{\sffamily\small\@chapapp{} \thechapter\ - \ ##1}{}}
-  % Define the section information (for the header):
-%    \renewcommand{\sectionmark}[1]{\markright{\sffamily\small \thesection \ ##1}}
-  %    \headingson
-  \pagenumbering{arabic}
-  \pagestyle{fancy}
+\newcommand{\afterpreface}{
+  	\pagestyle{fancy}
+  	\pagenumbering{arabic}
+  	
+  	% \ifdedicatoria
+   %  	\vspace*{5cm}
+   %  	\begin{flushright}
+   %    		\@textDedicatoria
+   %  	\end{flushright}
+   %  	\cleartooddpage[\thispagestyle{empty}]  
+  	% \fi
+  	
+  	\tableofcontents
+  	\cleartooddpage[\thispagestyle{empty}]
+  	
+ %  	\ifpaginaLOF
+	% % \addcontentsline{toc}{section}{List of Figures}
+ %    	\listoffigures
+ %    	\cleartooddpage[\thispagestyle{empty}]
+ %  	\fi
+  	
+ %  	\ifpaginaLOT
+	% % \addcontentsline{toc}{section}{List of Tables}
+ %  		\listoftables 
+ %  		\cleartooddpage[\thispagestyle{empty}]
+ %  	\fi
+  	
+  	\setlength{\parskip}{\normalparskip}
+  	\setlength{\parindent}{\normalparindent}
+  	\cleartooddpage[\thispagestyle{empty}]
+  	% Define the chapter information (for the header):
+    \renewcommand{\chaptermark}[1]{\markboth{\sffamily\small\@chapapp{} \thechapter\ - \ ##1}{}}
+  	% Define the section information (for the header):
+    \renewcommand{\sectionmark}[1]{\markright{\sffamily\small \thesection \ ##1}}
+    \headingson
+  	
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
