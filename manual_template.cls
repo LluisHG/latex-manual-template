@@ -271,7 +271,7 @@
 
 %%%%%%%%%% AUTHORS DESIGN %%%%%%%%%%
 \newcommand{\@autorC}{Falta autor!}
-\newcommand{\autorC}[1]{\renewcommand{\@autorC}{Autor: #1}}
+\newcommand{\autorC}[1]{\renewcommand{\@autorC}{#1}}
 
 \newcommand{\@autorE}{Author missing!}
 \newcommand{\autorE}[1]{\renewcommand{\@autorE}{Author: #1}}
@@ -360,7 +360,8 @@
 	    \ifthenelse{\boolean{Lcat}} 
 	    {
 	    	\begin{center}
-    			\large\rmfamily \textit{\@autorC}
+    			\large\rmfamily \textit{\@autorC}\\
+    			\textit{\today}
 	    	\end{center}
 	    }
 	    {
@@ -425,7 +426,7 @@
 \newcommand{\afterpreface}{
   	\pagestyle{fancy}
   	\pagenumbering{arabic}
-  	
+
   	% \ifdedicatoria
    %  	\vspace*{5cm}
    %  	\begin{flushright}
@@ -438,7 +439,7 @@
   	\cleartooddpage[\thispagestyle{empty}]
   	
  %  	\ifpaginaLOF
-	% % \addcontentsline{toc}{section}{List of Figures}
+ %      \addcontentsline{toc}{section}{List of Figures}
  %    	\listoffigures
  %    	\cleartooddpage[\thispagestyle{empty}]
  %  	\fi
