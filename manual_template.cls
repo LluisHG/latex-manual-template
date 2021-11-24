@@ -312,15 +312,15 @@
     % LOGO
     \ifthenelse{\boolean{logo}}
     {
-      	\begin{flushright}
-			\usebox{\LogoLL}  \hfill \usebox{\logoImg}
-      	\end{flushright}
-    	\\[6cm]
-    }{
-      	\begin{flushright}
-        	\usebox{\LogoLL} 
+      \begin{flushright}
+        \usebox{\LogoLL}  \hfill \usebox{\logoImg}
     	\end{flushright}
-      	\\[6cm]
+    	\\[1cm]
+    }{
+      \begin{flushright}
+        \usebox{\LogoLL} 
+  	  \end{flushright}
+    	\\[1cm]
     }
     
     % ------------------------------------------------------------
@@ -346,7 +346,7 @@
       		\begin{center}
         		\Huge\rmfamily  \@titolES  
       		\end{center}  
-      	}
+      }
     }
 
     % Horizontal line
@@ -386,13 +386,13 @@
     
     \ifthenelse{\boolean{coverpage}}
     {
-        \begin{centering}
-      		\usebox{\coverImg}
+      \begin{centering}
+    		\usebox{\coverImg}
     	\end{centering}
     }
     {
     	\begin{centering}
-      		\usebox{\CoverImgLL}
+    		\usebox{\CoverImgLL}
     	\end{centering}
     }
 
