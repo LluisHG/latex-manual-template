@@ -21,7 +21,7 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{manual_template}
-              [2020/12/02 Lluis document style]
+[2020/12/02 Lluis document style]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%----------------------------------------------------------------------------------------%%%
@@ -43,7 +43,7 @@
 % Variables dels possibles idiomes del document
 \newboolean{Lcat}   \setboolean{Lcat}{true}
 \newboolean{Leng}   \setboolean{Leng}{false}
-\newboolean{Les}	\setboolean{Les}{false}
+\newboolean{Les}	  \setboolean{Les}{false}
 
 %
 % \newboolean{PFC}         \setboolean{PFC}{false} % NOT USED
@@ -138,18 +138,19 @@
 % En aquest cas el \hoffset és zero i per tant el marge horitzontal per defecte es d'una
 % polzada
 
-\ifthenelse{\boolean{twoside}}{% Values for two-sided printing:
-  \setlength{\oddsidemargin}{-0.45cm}      %   Left margin on odd-numbered pages.
-  \setlength{\evensidemargin}{-0.46cm}     %   Left margin on even-numbered pages.
-  \setlength{\marginparwidth}{0cm}        %   Width of marginal notes.
-  \setlength{\marginparsep}{0cm}            % Horizontal space between outer margin and marginal note
-}
-{% Values for one-sided printing:
-  \setlength{\oddsidemargin}{0.46cm}      %   Left margin on odd-numbered pages.
-  \setlength{\evensidemargin}{0.46cm}       %   Left margin on even-numbered pages.
-  \setlength{\marginparwidth}{0cm}        %   Width of marginal notes.
-  \setlength{\marginparsep}{0pt}            % Horizontal space between outer margin and marginal note
-}
+\ifthenelse{\boolean{twoside}}
+  {% Values for two-sided printing:
+    \setlength{\oddsidemargin}{-0.45cm}      %   Left margin on odd-numbered pages.
+    \setlength{\evensidemargin}{-0.46cm}     %   Left margin on even-numbered pages.
+    \setlength{\marginparwidth}{0cm}        %   Width of marginal notes.
+    \setlength{\marginparsep}{0cm}            % Horizontal space between outer margin and marginal note
+  }
+  {% Values for one-sided printing:
+    \setlength{\oddsidemargin}{0.46cm}      %   Left margin on odd-numbered pages.
+    \setlength{\evensidemargin}{0.46cm}       %   Left margin on even-numbered pages.
+    \setlength{\marginparwidth}{0cm}        %   Width of marginal notes.
+    \setlength{\marginparsep}{0pt}            % Horizontal space between outer margin and marginal note
+  }
 %\setlength{\hoffset}{-1cm}
 
 
@@ -212,7 +213,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-%%%%%%%%%% LOGO DESIGN %%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% LOGO DESIGN                                                                              %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newlength{\LogoHeight}  
 \setlength{\LogoHeight}{1.5cm}
 
@@ -220,24 +223,30 @@
 \setlength{\LogoWidth}{2cm}
 
 \newsavebox{\LogoLL}
-\sbox{\LogoLL}{
-  \includegraphics[right, scale = 0.5]{./setup/drone_logo.jpg}
-}
+\sbox{\LogoLL}
+  {
+    \includegraphics[right, scale = 0.5]{./setup/drone_logo.jpg}
+  }
+
 %\sbox{\logoLL}{
 %  \includegraphics[llx =  22cm, lly =  12cm]
 %  [urx = 23cm, ury = 14cm]{./setup/drone_logo.jpg}
 %}
 
 \newcommand{\mylogo}[2]
-{ 
-  \newlength{\logoHeight} 
-  \newsavebox{\logoImg}      
-  \setlength{\logoHeight}{#2}
-  \sbox{\logoImg}{\includegraphics[totalheight=\logoHeight, right]{#1}}
-}
+  { 
+    \newlength{\logoHeight} 
+    \newsavebox{\logoImg}      
+    \setlength{\logoHeight}{#2}
+    \sbox{\logoImg}
+      {
+        \includegraphics[totalheight=\logoHeight, right]{#1}
+      }
+  }
 
-
-%%%%%%%%%% COVER IMAGE DESIGN %%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% COVER IMAGE DESIGN                                                                       %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newlength{\CoverImgHeight}	
 \setlength{\CoverImgHeight}{10cm}
 
@@ -245,17 +254,25 @@
 \setlength{\CoverImgWidth}{16.5cm}
 
 \newsavebox{\CoverImgLL}
-\sbox{\CoverImgLL}{\includegraphics[width=\CoverImgWidth]{./setup/drone_cover}}
+\sbox{\CoverImgLL}
+  {
+    \includegraphics[width=\CoverImgWidth]{./setup/drone_cover}
+  }
 
 \newcommand{\mycoverImg}[2]
-{ 
-  \newlength{\coverImgWidth} 
-  \newsavebox{\coverImg}      
-  \setlength{\coverImgWidth}{#2}
-  \sbox{\coverImg}{\includegraphics[width=\coverImgWidth]{#1}}
-}
+  { 
+    \newlength{\coverImgWidth} 
+    \newsavebox{\coverImg}      
+    \setlength{\coverImgWidth}{#2}
+    \sbox{\coverImg}
+      {
+        \includegraphics[width=\coverImgWidth]{#1}
+      }
+  }
 
-%%%%%%%%%% TITLE DESIGN %%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% TITLE DESIGN                                                                             %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\@titol}{Falta titol!}
 \newcommand{\titol}[1]{\renewcommand{\@titol}{#1}}
 
@@ -268,8 +285,9 @@
 \newcommand{\@titolES}{Falta titol Castella!}
 \newcommand{\titolES}[1]{\renewcommand{\@titolES}{#1}}
 
-
-%%%%%%%%%% AUTHORS DESIGN %%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% AUTHORS DESIGN                                                                           %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\@autorC}{Falta autor!}
 \newcommand{\autorC}[1]{\renewcommand{\@autorC}{#1}}
 
@@ -282,46 +300,55 @@
 %\newlength{\Lautors}
 
 
-%%%%%%%%%% PORTADA ENVIRONMENT %%%%%%%%%%
-\newcommand{\portada}{
-  \ifthenelse{\boolean{Lcat}}{
-      \newcommand{\@NtitolMANUAL}{T\'itol del manual}
-      \newcommand{\@Nautor}{Autor}
-      \newcommand{\@Ntitulacio}{Titulaci\'o}
-      \newcommand{\@Ndata}{Data}
-  }{
-  	\ifthenelse{\boolean{Les}}{
-      \newcommand{\@NtitolMANUAL}{T\'itulo del manual}
-      \newcommand{\@Nautor}{Autor}
-      \newcommand{\@Ntitulacio}{Titulaci\'on}
-      \newcommand{\@Ndata}{Fecha}    
-    }{
-  	  \newcommand{\@NtitolMANUAL}{Manual title}
-      \newcommand{\@Nautor}{Author}
-      \newcommand{\@Ntitulacio}{Degree}
-      \newcommand{\@Ndata}{Date} 
-    }
-  }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PORTADA ENVIRONMENT                                                                      %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-  %\settowidth{\Lautors}{{\normalsize\bf\sffamily\MakeUppercase   \@Nautors : }}
-  %\settowidth{\Ldirectors}{{\normalsize\bf\sffamily\MakeUppercase \@Ndirectors :}}
-  %\renewcommand{\and}{\\ \hspace*{\Lautors}}
+\newcommand{\portada}
+  {
+    \ifthenelse{\boolean{Lcat}}
+      {
+        \newcommand{\@NtitolMANUAL}{T\'itol del manual}
+        \newcommand{\@Nautor}{Autor}
+        \newcommand{\@Ntitulacio}{Titulaci\'o}
+        \newcommand{\@Ndata}{Data}
+      }
+      {
+        \ifthenelse{\boolean{Les}}
+          {
+            \newcommand{\@NtitolMANUAL}{T\'itulo del manual}
+            \newcommand{\@Nautor}{Autor}
+            \newcommand{\@Ntitulacio}{Titulaci\'on}
+            \newcommand{\@Ndata}{Fecha}    
+          }
+          {
+            \newcommand{\@NtitolMANUAL}{Manual title}
+            \newcommand{\@Nautor}{Author}
+            \newcommand{\@Ntitulacio}{Degree}
+            \newcommand{\@Ndata}{Date} 
+          }
+      }
 
-  \begin{tabular}{p{\textwidth}}
-    
-    % LOGO
-    \ifthenelse{\boolean{logo}}
-    {
-      \begin{flushright}
-        \usebox{\LogoLL}  \hfill \usebox{\logoImg}
-    	\end{flushright}
-    	\\[1cm]
-    }{
-      \begin{flushright}
-        \usebox{\LogoLL} 
-  	  \end{flushright}
-    	\\[1cm]
-    }
+    %\settowidth{\Lautors}{{\normalsize\bf\sffamily\MakeUppercase   \@Nautors : }}
+    %\settowidth{\Ldirectors}{{\normalsize\bf\sffamily\MakeUppercase \@Ndirectors :}}
+    %\renewcommand{\and}{\\ \hspace*{\Lautors}}
+
+    \begin{tabular}{p{\textwidth}}
+
+      % LOGO
+      \ifthenelse{\boolean{logo}}
+        {
+          \begin{flushright}
+            \usebox{\LogoLL}  \hfill \usebox{\logoImg}
+          \end{flushright}
+          \\[1cm]
+        }
+        {
+          \begin{flushright}
+            \usebox{\LogoLL} 
+          \end{flushright}
+          \\[1cm]
+        }
     
     % ------------------------------------------------------------
     % TITOL
@@ -330,24 +357,24 @@
     \noindent\makebox[\linewidth]{\rule{\textwidth}{1.8pt}}
 
     \ifthenelse{\boolean{Lcat}}
-    {
-		\begin{center}
-			\Huge\rmfamily  \@titolC 
-      	\end{center}  
-    }
-    {
-	  	\ifthenelse{\boolean{Leng}}
-	  	{
-      		\begin{center}
-  				\Huge\rmfamily  \@titolE 
-  			\end{center}  
-	   	}
-	   	{
-      		\begin{center}
-        		\Huge\rmfamily  \@titolES  
-      		\end{center}  
+      {
+        \begin{center}
+          \Huge\rmfamily  \@titolC 
+        \end{center}  
       }
-    }
+      {
+        \ifthenelse{\boolean{Leng}}
+          {
+            \begin{center}
+              \Huge\rmfamily  \@titolE 
+            \end{center}  
+          }
+          {
+            \begin{center}
+              \Huge\rmfamily  \@titolES  
+            \end{center}  
+          }
+      }
 
     % Horizontal line
     \noindent\makebox[\linewidth]{\rule{\textwidth}{1.8pt}}
@@ -355,29 +382,30 @@
     % ------------------------------------------------------------
     % AUTHORS
     \\[1.5cm]
+
     \ifthenelse{\boolean{autor}}
-    {
-	    \ifthenelse{\boolean{Lcat}} 
-	    {
-	    	\begin{center}
-    			\large\rmfamily \textit{\@autorC}\\
-    			\textit{\today}
-	    	\end{center}
-	    }
-	    {
-	      	\ifthenelse{\boolean{Leng}} 
-	      	{ 
-	      		\begin{center}
-    				\large\rmfamily \textit{\@autorE}
-	    		\end{center} 
-	      	}
-	      	{
-	      		 \begin{center}
-    				\large\rmfamily \textit{\@autorES} 
-	    		\end{center} 
-	      	}
-	    }
-    }
+      {
+        \ifthenelse{\boolean{Lcat}} 
+          {
+            \begin{center}
+              \large\rmfamily \textit{\@autorC}\\
+              \textit{\today}
+            \end{center}
+          }
+          {
+            \ifthenelse{\boolean{Leng}} 
+              { 
+                \begin{center}
+                  \large\rmfamily \textit{\@autorE}
+                \end{center} 
+              }
+              {
+                \begin{center}
+                  \large\rmfamily \textit{\@autorES} 
+                \end{center} 
+              }
+          }
+     }
 
     \\[2.5cm]
 
@@ -385,16 +413,16 @@
     % IMATGE PRINCIPAL
     
     \ifthenelse{\boolean{coverpage}}
-    {
-      \begin{centering}
-    		\usebox{\coverImg}
-    	\end{centering}
-    }
-    {
-    	\begin{centering}
-    		\usebox{\CoverImgLL}
-    	\end{centering}
-    }
+      {
+        \begin{centering}
+          \usebox{\coverImg}
+        \end{centering}
+      }
+      {
+        \begin{centering}
+          \usebox{\CoverImgLL}
+        \end{centering}
+      }
 
 
     %\fbox{\parbox{\textwidth}{
@@ -410,56 +438,66 @@
     %                                     {\normalsize\bf\sffamily\MakeUppercase  \@Ndata : \today               }  \\[2ex]
     %}} \\
     
-  \end{tabular}
-  \cleardoublepage
-}
+    \end{tabular}
+    \cleardoublepage
+  }
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% VARIABLE TO LOAD EVERYTHING BEFORE THE DOCUMENT STARTS                                   %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\beforepreface}
-{
-	\pagestyle{empty}
-  	\pagenumbering{roman}
-  	\setlength{\parskip}{0ex}
-  	\setlength{\parindent}{0ex}
-  	\portada
-}
+  {
+    \pagestyle{empty}
+    \pagenumbering{roman}
+    \setlength{\parskip}{0ex}
+    \setlength{\parindent}{0ex}
+    \portada
+  }
 
-\newcommand{\afterpreface}{
-  	\pagestyle{fancy}
-  	\pagenumbering{arabic}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% VARIABLE TO GIVE A DIFFERENT LAYOUT THAN THE COVER PAGE                                  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\afterpreface}
+  {
+    \pagestyle{fancy}
+    \pagenumbering{arabic}
 
   	% \ifdedicatoria
-   %  	\vspace*{5cm}
-   %  	\begin{flushright}
-   %    		\@textDedicatoria
-   %  	\end{flushright}
-   %  	\cleartooddpage[\thispagestyle{empty}]  
+    %  	\vspace*{5cm}
+    %  	\begin{flushright}
+    %    		\@textDedicatoria
+    %  	\end{flushright}
+    %  	\cleartooddpage[\thispagestyle{empty}]  
   	% \fi
   	
-  	\tableofcontents
-  	\cleartooddpage[\thispagestyle{empty}]
+  	%\tableofcontents
+  	%\cleartooddpage[\thispagestyle{empty}]
   	
- %  	\ifpaginaLOF
- %      \addcontentsline{toc}{section}{List of Figures}
- %    	\listoffigures
- %    	\cleartooddpage[\thispagestyle{empty}]
- %  	\fi
-  	
- %  	\ifpaginaLOT
-	% % \addcontentsline{toc}{section}{List of Tables}
- %  		\listoftables 
- %  		\cleartooddpage[\thispagestyle{empty}]
- %  	\fi
-  	
-  	\setlength{\parskip}{\normalparskip}
-  	\setlength{\parindent}{\normalparindent}
-  	\cleartooddpage[\thispagestyle{empty}]
+    %  	\ifpaginaLOF
+    %      \addcontentsline{toc}{section}{List of Figures}
+    %    	\listoffigures
+    %    	\cleartooddpage[\thispagestyle{empty}]
+    %  	\fi
+
+    %  	\ifpaginaLOT
+    % % \addcontentsline{toc}{section}{List of Tables}
+    %  		\listoftables 
+    %  		\cleartooddpage[\thispagestyle{empty}]
+    %  	\fi
+
+    \setlength{\parskip}{\normalparskip}
+    \setlength{\parindent}{\normalparindent}
+    \cleartooddpage[\thispagestyle{empty}]
   	% Define the chapter information (for the header):
     \renewcommand{\chaptermark}[1]{\markboth{\sffamily\small\@chapapp{} \thechapter\ - \ ##1}{}}
   	% Define the section information (for the header):
     \renewcommand{\sectionmark}[1]{\markright{\sffamily\small \thesection \ ##1}}
     \headingson
-  	
-}
+
+  }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% HEADERS AND FOOTERS DESIGN                                                               %%
@@ -469,19 +507,19 @@
 \renewcommand\footrulewidth{0pt}
 %\addtolength{\headwidth}{\marginparwidth+\marginparsep}   % Span headwidth to marginal notes
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% REDEFINITION OF PAGE MARKERS
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% REDEFINITION OF PAGE MARKERS                                                             %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \renewcommand{\sectionmark}[1]{\markright{#1}}
 \renewcommand{\chaptermark}[1]{\markboth{\footnotesize #1}{#1}}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% HEADERS AND FOOTERS
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% HEADERS AND FOOTERS                                                                      %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \lhead[\fancyplain{}{\footnotesize \thepage}]{\fancyplain{\leftmark}{\leftmark}}
 \chead{}
-\rhead[\fancyplain{}{\footnotesize \@titol}]{\fancyplain{}{\footnotesize \thepage}}
+\rhead[\fancyplain{}{\footnotesize \@titolE}]{\fancyplain{}{\footnotesize \thepage}}
 \lfoot{}
 \cfoot{}
 \rfoot{}
@@ -492,7 +530,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \tocloftpagestyle{empty}
-    
+
 %% TOC title configuration
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \setlength{\cftbeforetoctitleskip}{0ex}
@@ -571,7 +609,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% PARAGRAPHING                                                                             %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- 
+
 \setlength{\parskip}{2ex}          % Extra vertical space between paragraphs (added to \baselineskip)
 \setlength{\parindent}{0em}        % Width of paragraph indentation.
 
@@ -631,7 +669,7 @@
 \renewcommand{\thesubparagraph}{-}
 
 \renewcommand{\chapter}{%
-  \if@openright\cleartooddpage[\thispagestyle{empty}]\else\clearpage\fi
+\if@openright\cleartooddpage[\thispagestyle{empty}]\else\clearpage\fi
   \suppressfloats[t]  % Prevents floats appearing in the top of the page chapter
   \addtocontents{lof}{\protect\addvspace{15\p@}}%
   \addtocontents{lot}{\protect\addvspace{15\p@}}%
@@ -639,29 +677,29 @@
   \global\@topnum\z@
   \@afterindentfalse
   \secdef\@chapter\@schapter
-}
+  }
 
 % \@makechapterhead Makes the heading for the \chapter command.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \renewcommand{\@makechapterhead}[1]{%
   \noindent                             % No indentation in this paragraph
   \begin{center}                    % Prints chapter name etc...
-    \LARGE\sffamily\bfseries\MakeUppercase 
+  \LARGE\sffamily\bfseries\MakeUppercase 
     \@chapapp{} \thechapter . \MakeUppercase{#1} \par\nobreak  %% \@chapapp{} prints ``CHAPTER'' according to selected language
-  \end{center}                     
-  \vspace{3ex}
-}
+    \end{center}                     
+    \vspace{3ex}
+    }
 
 % \@makechapterhead Makes the heading for the \chapter* command.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \renewcommand{\@makeschapterhead}[1]{%
   \noindent                                                     % No indentation in this paragraph
   \begin{center}
-    \LARGE\sffamily\bfseries \MakeUppercase{#1} \par\nobreak
+  \LARGE\sffamily\bfseries \MakeUppercase{#1} \par\nobreak
   \end{center}
   \vspace{3ex}
   \addcontentsline{toc}{chapter}{\large\sffamily\bfseries #1}
-}
+  }
 
 
 
@@ -703,7 +741,7 @@
                  {-3.5ex plus -1ex minus -.2ex}%    %% BEFORESKIP
                  {2.3ex plus .2ex}%                  %% AFTERSKIP
                  {\sffamily\Large\bfseries}%         %% STYLE
-}
+                 }
 
 \renewcommand{\subsection}{%
   \@startsection{subsection}%                        %% NAME
@@ -711,7 +749,7 @@
                 {-3.25ex plus -1ex minus -.2ex}%     %% BEFORESKIP
                 {1.5ex plus .2ex}%                   %% AFTERSKIP
                 {\sffamily\large\bfseries}%          %% STYLE
-}
+                }
 
 \renewcommand{\subsubsection}{%
   \@startsection{subsubsection}%                     %% NAME
@@ -719,7 +757,7 @@
                 {-3.25ex plus -1ex minus -.2ex}%     %% BEFORESKIP
                 {1.0ex plus .2ex}%                   %% AFTERSKIP
                 {\sffamily\normalsize\itshape}%      %% STYLE
-}
+                }
 
 \renewcommand{\paragraph}{%
   \@startsection{paragraph}%                             %% NAME
@@ -727,7 +765,7 @@
                 {3.25ex plus 1ex minus .2ex}%            %% BEFORESKIP
                 {1ex}%                                   %% AFTERSKIP
                 {\normalsize\bfseries} %        %% STYLE
-}
+                }
 
 \renewcommand{\subparagraph}{%
   \@startsection{subparagraph}%                      %% NAME
@@ -735,58 +773,58 @@
                 {3.25ex plus 1ex minus .2ex}%        %% BEFORESKIP
                 {1ex}%                              %% AFTERSKIP
                 {\normalsize\bfseries}%                       %% STYLE
-}
+                }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% APPENDICES CONFIGURATION
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \DeclareRobustCommand{\changetoapp}{%
-  \setlength{\cftbeforechapskip}{2em}  
-  \setlength{\cftchapindent}{0em}
-  \setlength{\cftchapnumwidth}{8em}
-  \renewcommand{\cftchapleader}{\bfseries\cftsecleader}
-  \renewcommand{\cftchapfont}{\large\sffamily\bfseries}
+\setlength{\cftbeforechapskip}{2em}  
+\setlength{\cftchapindent}{0em}
+\setlength{\cftchapnumwidth}{8em}
+\renewcommand{\cftchapleader}{\bfseries\cftsecleader}
+\renewcommand{\cftchapfont}{\large\sffamily\bfseries}
   \renewcommand*{\cftchappresnum}{\MakeUppercase \appendixname \space}%
   \renewcommand{\cftchapaftersnum}{. \space}
   \renewcommand{\cftchapaftersnumb}{}%
-}
+  }
 
-\let\oldappendix\appendix
+  \let\oldappendix\appendix
 
-\renewcommand*{\appendix}{
+  \renewcommand*{\appendix}{
   \oldappendix 
   \addtocontents{toc}{\changetoapp}
  % \addtocontents{toc}{\protect\clearpage\par}
 %  \addtocontents{toc}{{\Large\sffamily\bfseries Annexos}\par}
 %  \addtocontents{toc}{\protect\apprule \par}
-  
-  \addtocontents{lof}{\changetoapp}
+
+\addtocontents{lof}{\changetoapp}
 %  \addtocontents{lof}{\protect\clearpage\par}
 %  \addtocontents{lof}{{\Large\sffamily\bfseries Annexos}\par}
  % \addtocontents{lof}{\protect\apprule \par}
 
-  \addtocontents{lot}{\changetoapp} 
+ \addtocontents{lot}{\changetoapp} 
 %  \addtocontents{lot}{\protect\clearpage\par}
 %  \addtocontents{lot}{{\Large\sffamily\bfseries Annexos}\par}
 %  \addtocontents{lot}{\protect\apprule \par}
 
 
-  \cleardoublepage
-  
+\cleardoublepage
+
 }
 
 \newcommand{\senseportada}{
-  \vspace*{\stretch{1}}                
+\vspace*{\stretch{1}}                
   \begin{center}                    % Prints chapter name etc...
-    \Huge\sffamily\bfseries\MakeUppercase \@Napp  \par
+  \Huge\sffamily\bfseries\MakeUppercase \@Napp  \par
   \end{center}                     
   \vspace*{\stretch{2}}                
   \thispagestyle{empty}                 % Page style
   \newpage
   \thispagestyle{empty}                 % Page style
   \newpage
-}
+  }
 
 % \newcommand{\ambportada}{
 %   \settowidth{\Lautors}{{\normalsize\bf\sffamily\MakeUppercase   \@Nautors : }}
@@ -810,7 +848,7 @@
 %   \end{tabular}
 %   \setcounter{page}{-1}
 % }
- 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%----------------------------------------------------------------------------------------%%%
